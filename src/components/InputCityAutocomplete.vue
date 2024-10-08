@@ -17,7 +17,7 @@ const hideDropdown = (): void => {
   showDropdown.value = false;
 };
 
-const selectCity = (city: string): void => {
+const selectCity = async (city: string): Promise<void> => {
   searchTerm.value = city;
   hideDropdown();
 };
