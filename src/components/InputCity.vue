@@ -19,11 +19,18 @@ const hideDropdown = (): void => {
   showDropdown.value = false;
 };
 
-const selectCity = async (city: string): Promise<void> => {
+const selectCity = async (city: string) => {
   searchTerm.value = city;
-  weatherStore.citySelected = city;
   hideDropdown();
 };
+
+const addCity = () => {
+  if (!checkWeatherCardLimit()) return
+  weatherStore.citySelected = searchTerm.value;
+  searchTerm.value = ''
+}
+
+const checkWeatherCardLimit = () => weatherStore.weatherCardList.length < 5
 
 const handleClickOutside = (event: MouseEvent): void => {
   const dropdownElement = document.querySelector('.dropdown') as HTMLElement;
@@ -56,6 +63,7 @@ onBeforeUnmount(() => {
         {{ city }}
       </li>
     </ul>
+    <button @click="addCity"> + </button>
   </div>
 </template>
 
