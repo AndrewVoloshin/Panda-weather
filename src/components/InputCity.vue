@@ -1,9 +1,11 @@
 <script setup lang="ts">
 import { ref, computed, onMounted, onBeforeUnmount } from 'vue';
 import { cities } from '@/data/cities'
+import { useWeatherStore } from '@/stores/weather'
+
+const weatherStore = useWeatherStore();
 
 const cityList: string[] = cities;
-
 const searchTerm = ref<string>('');
 const showDropdown = ref<boolean>(false);
 
@@ -19,6 +21,7 @@ const hideDropdown = (): void => {
 
 const selectCity = async (city: string): Promise<void> => {
   searchTerm.value = city;
+  weatherStore.citySelected = city;
   hideDropdown();
 };
 

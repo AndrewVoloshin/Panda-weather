@@ -2,13 +2,16 @@
 
 
   <h1>Поиск погоды</h1>
-  <CityAutocomplete />
+  <input-city />
+
+  <weather-card-list />
 
 
 </template>
 
 <script setup lang="ts">
-import CityAutocomplete from '../components/InputCityAutocomplete.vue';
+import InputCity from '../components/InputCity.vue';
+import WeatherCardList from '../components//WeatherCardList.vue';
 import { ref, onMounted } from 'vue';
 
 
