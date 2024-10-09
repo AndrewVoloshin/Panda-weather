@@ -47,14 +47,12 @@ onMounted(async () => {
 });
 
 
-
 </script>
 
 
 <template>
-    <weather-card />
-    <div>{{ weatherStore.citySelected }}</div>
-
-    <div v-for="weatherItem in weatherStore.weatherCardList"> {{ weatherItem }} </div>
-
+    <div v-for="(weatherItem, index) in weatherStore.weatherCardList"
+         :key="index">
+        <weather-card :weatherItem="weatherItem" />
+    </div>
 </template>
