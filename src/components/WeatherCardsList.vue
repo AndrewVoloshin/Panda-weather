@@ -1,6 +1,6 @@
 <script setup lang="ts">
 import { onMounted } from 'vue'
-import WeatherController from './WeatherController.vue'
+import WeatherController from './WeatherCardsController.vue'
 import { useWeatherStore } from '@/stores/weather'
 import { getCityWeather } from '@/composable/getCityWeather'
 

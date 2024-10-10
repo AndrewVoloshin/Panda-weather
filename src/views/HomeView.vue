@@ -11,7 +11,7 @@
 
 <script setup lang="ts">
 import InputCity from '../components/InputCity.vue';
-import WeatherCardList from '../components//WeatherCardList.vue';
+import WeatherCardList from '../components/WeatherCardsList.vue';
 import { ref, onMounted } from 'vue';
 
 
