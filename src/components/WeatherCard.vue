@@ -21,7 +21,6 @@ const getIconUrl = (iconCode: string) => {
     </div>
     <div class="weather-card__details">
       <p> {{ weather.weather[0].description }}</p>
-
       <p>Humidity: {{ weather.main.humidity }}%</p>
       <p>Wind: {{ weather.wind.speed }} km/h</p>
     </div>

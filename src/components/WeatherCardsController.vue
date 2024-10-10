@@ -4,7 +4,6 @@ import WeatherCard from './WeatherCard.vue';
 import WeatherCardFiveDays from './WeatherCardFiveDays.vue';
 import ButtonLike from './ButtonLike.vue';
 
-
 const props = defineProps({
     weather: {
         type: Object,
@@ -17,7 +16,6 @@ const isSingleDayForecast = ref(true);
 const toggleForecast = () => {
     isSingleDayForecast.value = !isSingleDayForecast.value;
 };
-
 </script>
 
 <template>
@@ -42,8 +40,6 @@ const toggleForecast = () => {
         </div>
     </div>
 </template>
-
-
 
 <style scoped>
 .weather-card {

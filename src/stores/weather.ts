@@ -2,7 +2,7 @@ import { ref, computed, watch, reactive } from 'vue'
 import { defineStore } from 'pinia'
 
 import { getCityCoordinates } from '@/composable/getCityCoordinates'
-import { getCityWeather } from '@/composable/getCityWeather'
+import { getWeatherByCityCoordinates } from '@/composable/getWeatherByCityCoordinates'
 
 export const useWeatherStore = defineStore('weather', () => {
 
@@ -15,7 +15,7 @@ export const useWeatherStore = defineStore('weather', () => {
     if (!newCity) return
     const coordinates = await getCityCoordinates(newCity);
     if (!coordinates) return
-    const weather = await getCityWeather(coordinates);
+    const weather = await getWeatherByCityCoordinates(coordinates);
     if (!weather) return
     Object.assign(weatherCity, weather);
     weatherCardList.push(weather)

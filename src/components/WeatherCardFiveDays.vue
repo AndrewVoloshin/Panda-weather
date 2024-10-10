@@ -1,6 +1,6 @@
 <script setup lang="ts">
 import { reactive, onMounted } from 'vue';
-import { getCityWeather } from '@/composable/getCityWeather'
+import { getWeatherByCityCoordinates } from '@/composable/getWeatherByCityCoordinates'
 
 const props = defineProps({
   weather: {
@@ -16,13 +16,13 @@ onMounted(() => {
 });
 
 const getForecastFiveDays = async () => {
-  const weatherForecast = await getCityWeather(props.weather.coord, 'forecast');
+  const weatherForecast = await getWeatherByCityCoordinates(props.weather.coord, 'forecast');
   console.log('weatherForecast=>', weatherForecast);
 
   const groupedByDays = weatherForecast.list.reduce((acc: any, current: any) => {
     const date = current.dt_txt.split(' ')[0];
     if (!acc[date]) {
-      acc[date] = { temps: [], avgTemp: 0, icon: current.weather[0].icon, description: current.weather[0].description }; // Сохраняем описание
+      acc[date] = { temps: [], avgTemp: 0, icon: current.weather[0].icon, description: current.weather[0].description }; 
     }
     acc[date].temps.push(current.main.temp);
     return acc;

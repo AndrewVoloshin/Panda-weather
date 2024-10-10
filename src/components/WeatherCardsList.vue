@@ -2,39 +2,9 @@
 import { onMounted } from 'vue'
 import WeatherController from './WeatherCardsController.vue'
 import { useWeatherStore } from '@/stores/weather'
-import { getCityWeather } from '@/composable/getCityWeather'
+import { getWeatherMyPosition } from '@/composable/getMyLocation'
 
 const weatherStore = useWeatherStore()
-
-
-const getWeatherMyPosition = async () => {
-    if (weatherStore.isGetMyLocation) return
-    weatherStore.isGetMyLocation = true
-    const myCoordinates = await getMyLocation();
-    const weatherData = await getCityWeather(myCoordinates);
-    return weatherData
-}
-
-const getMyLocation = async (): Promise<{ lat: string; lon: string } | null> => {
-    return new Promise((resolve, reject) => {
-        if (navigator.geolocation) {
-            navigator.geolocation.getCurrentPosition(
-                (position) => {
-                    const { latitude, longitude } = position.coords;
-                    console.log(position.coords);
-                    resolve({ lat: latitude.toString(), lon: longitude.toString() });
-                },
-                (error) => {
-                    console.error('Error getting location:', error);
-                    reject(null);
-                }
-            );
-        } else {
-            console.error('Geolocation is not supported by this browser.');
-            reject(null);
-        }
-    });
-};
 
 const addWeatherToList = (weatherData) => {
     if (!weatherData) return
@@ -42,13 +12,13 @@ const addWeatherToList = (weatherData) => {
 }
 
 onMounted(async () => {
+    if (weatherStore.isGetMyLocation) return
+    weatherStore.isGetMyLocation = true
     const weatherMyPosition = await getWeatherMyPosition()
     addWeatherToList(weatherMyPosition)
 });
 
-
 </script>
-
 
 <template>
     <div v-for="(weather, index) in weatherStore.weatherCardList"
