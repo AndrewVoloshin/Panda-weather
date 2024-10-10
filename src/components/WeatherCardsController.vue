@@ -1,48 +1,74 @@
 <script setup lang="ts">
-import { ref } from 'vue';
+import { ref, watch } from 'vue';
 import WeatherCard from './WeatherCard.vue';
 import WeatherCardFiveDays from './WeatherCardFiveDays.vue';
 
 const props = defineProps({
     weather: {
         type: Object,
-        required: true
-    }
+        required: true,
+    },
 });
 
 const isSingleDayForecast = ref(true);
+const isLiked = ref(false); 
 
 const toggleForecast = () => {
     isSingleDayForecast.value = !isSingleDayForecast.value;
 };
 
+const toggleLike = () => {
+    const weatherId = props.weather.id; 
+    const storedWeather = JSON.parse(localStorage.getItem('likedWeather') || '[]');
+
+    if (isLiked.value) {
+        const updatedWeather = storedWeather.filter((item) => item.id !== weatherId);
+        localStorage.setItem('likedWeather', JSON.stringify(updatedWeather));
+    } else {
+        storedWeather.push(props.weather);
+        localStorage.setItem('likedWeather', JSON.stringify(storedWeather));
+    }
+    isLiked.value = !isLiked.value;
+};
+
+watch(
+    () => props.weather,
+    (newWeather) => {
+        const storedWeather = JSON.parse(localStorage.getItem('likedWeather') || '[]');
+        isLiked.value = storedWeather.some((item) => item.id === newWeather.id);
+    },
+    { immediate: true }
+);
+
+
 </script>
 
 <template>
-
     <div class="weather-card">
         <div class="weather-card__header">
             <h3>{{ weather.name }}</h3>
             <p>{{ weather.date }}</p>
         </div>
 
-
         <weather-card v-if="isSingleDayForecast"
                       :weather="props.weather" />
         <weather-card-five-days v-else
                                 :weather="props.weather" />
 
-
         <div class="button-container">
             <button @click="toggleForecast">
-                {{ isSingleDayForecast ? 'Switch to 5-day forecast' : 'Switch to 1-day forecast' }}
+                {{ isSingleDayForecast ? '5-day forecast' : '1-day forecast' }}
             </button>
 
-            <button>Like</button>
+            <button @click="toggleLike">
+                <span v-if="isLiked">&#9829;</span>
+                <span v-else>&#9825;</span>
+                Like
+            </button>
         </div>
     </div>
-
 </template>
+
 
 
 <style scoped>
@@ -87,5 +113,13 @@ button {
 
 button:hover {
     background-color: #0056b3;
+}
+
+/* Стили для сердечка */
+button span {
+    margin-right: 4px;
+    /* Отступ между иконкой и текстом */
+    font-size: 16px;
+    /* Размер иконки */
 }
 </style>
