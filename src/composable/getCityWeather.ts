@@ -3,9 +3,9 @@ export interface ICityCoordinates {
     lon: string | null;
 }
 
-export const getCityWeather = async (cityCoordinates: ICityCoordinates) => {
+export const getCityWeather = async (cityCoordinates: ICityCoordinates, format = 'weather') => {
     if (!cityCoordinates) return
-    const url = `http://api.openweathermap.org/data/2.5/weather?lat=${cityCoordinates.lat}&lon=${cityCoordinates.lon}&appid=2220f87983d31fbc9d2f18e9292efacb&units=metric`;
+    const url = `http://api.openweathermap.org/data/2.5/${format}?lat=${cityCoordinates.lat}&lon=${cityCoordinates.lon}&appid=2220f87983d31fbc9d2f18e9292efacb&units=metric`;
 
 
     try {

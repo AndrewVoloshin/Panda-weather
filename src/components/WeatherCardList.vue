@@ -1,6 +1,6 @@
 <script setup lang="ts">
-import WeatherCard from '@/components/WeatherCard.vue'
-import { ref, computed, watch, reactive, onMounted } from 'vue'
+import { onMounted } from 'vue'
+import WeatherController from './WeatherController.vue'
 import { useWeatherStore } from '@/stores/weather'
 import { getCityWeather } from '@/composable/getCityWeather'
 
@@ -51,8 +51,8 @@ onMounted(async () => {
 
 
 <template>
-    <div v-for="(weatherItem, index) in weatherStore.weatherCardList"
+    <div v-for="(weather, index) in weatherStore.weatherCardList"
          :key="index">
-        <weather-card :weatherItem="weatherItem" />
+        <weather-controller :weather="weather" />
     </div>
 </template>

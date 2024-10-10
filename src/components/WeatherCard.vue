@@ -1,28 +1,7 @@
-<template>
-  <div class="weather-card">
-    <div class="weather-card__header">
-      <h3>{{ weatherItem.name }}</h3>
-      <p>{{ weatherItem.date }}</p>
-    </div>
-    <div class="weather-card__body">
-      <div class="weather-card__temperature">
-        <span>{{ Math.floor(weatherItem.main.temp) }}°C</span>
-        <img :src="getIconUrl(weatherItem.weather[0].icon)"
-             alt="Weather icon" />
-      </div>
-      <div class="weather-card__details">
-        <p> {{ weatherItem.weather[0].description }}</p>
-
-        <p>Humidity: {{ weatherItem.main.humidity }}%</p>
-        <p>Wind: {{ weatherItem.wind.speed }} km/h</p>
-      </div>
-    </div>
-  </div>
-</template>
-
 <script setup lang="ts">
+import { getCityWeather } from '@/composable/getCityWeather'
 const props = defineProps({
-  weatherItem: {
+  weather: {
     type: Object,
     required: true
   }
@@ -31,8 +10,59 @@ const props = defineProps({
 const getIconUrl = (iconCode: string) => {
   return `http://openweathermap.org/img/wn/${iconCode}@2x.png`;
 }
-console.log(props.weatherItem);
+
+const getForecastFiveDays = async () => {
+  const weatherForecast = await getCityWeather(props.weather.coord, 'forecast')
+
+  const groupedByDays = weatherForecast.list.reduce((acc: any, current: any) => {
+    const date = current.dt_txt.split(' ')[0];
+    if (!acc[date]) {
+      acc[date] = { temps: [], avgTemp: 0 };
+    }
+    acc[date].temps.push(current.main.temp);
+    return acc;
+  }, {});
+
+  for (const day in groupedByDays) {
+    const temps = groupedByDays[day].temps;
+    groupedByDays[day].avgTemp = temps.reduce((sum: number, temp: number) => sum + temp, 0) / temps.length;
+  }
+
+  const fiveDayForecast = Object.keys(groupedByDays).map((date) => ({
+    date,
+    avgTemp: groupedByDays[date].avgTemp,
+  }));
+
+  console.log(fiveDayForecast);
+
+}
 </script>
+
+<template>
+  <div class="weather-card">
+    <div class="weather-card__header">
+      <h3>{{ weather.name }}</h3>
+      <p>{{ weather.date }}</p>
+    </div>
+    <div class="weather-card__body">
+      <div class="weather-card__temperature">
+        <span>{{ Math.floor(weather.main.temp) }}°C</span>
+        <img :src="getIconUrl(weather.weather[0].icon)"
+             alt="Weather icon" />
+      </div>
+      <div class="weather-card__details">
+        <p> {{ weather.weather[0].description }}</p>
+
+        <p>Humidity: {{ weather.main.humidity }}%</p>
+        <p>Wind: {{ weather.wind.speed }} km/h</p>
+      </div>
+    </div>
+    <div class="button-container">
+      <button @click="getForecastFiveDays()">Switch</button>
+      <button>Like</button>
+    </div>
+  </div>
+</template>
 
 <style scoped>
 .weather-card {
