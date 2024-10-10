@@ -1,7 +1,9 @@
 <script setup lang="ts">
-import { ref, watch } from 'vue';
+import { ref } from 'vue';
 import WeatherCard from './WeatherCard.vue';
 import WeatherCardFiveDays from './WeatherCardFiveDays.vue';
+import ButtonLike from './ButtonLike.vue';
+
 
 const props = defineProps({
     weather: {
@@ -11,35 +13,10 @@ const props = defineProps({
 });
 
 const isSingleDayForecast = ref(true);
-const isLiked = ref(false); 
 
 const toggleForecast = () => {
     isSingleDayForecast.value = !isSingleDayForecast.value;
 };
-
-const toggleLike = () => {
-    const weatherId = props.weather.id; 
-    const storedWeather = JSON.parse(localStorage.getItem('likedWeather') || '[]');
-
-    if (isLiked.value) {
-        const updatedWeather = storedWeather.filter((item) => item.id !== weatherId);
-        localStorage.setItem('likedWeather', JSON.stringify(updatedWeather));
-    } else {
-        storedWeather.push(props.weather);
-        localStorage.setItem('likedWeather', JSON.stringify(storedWeather));
-    }
-    isLiked.value = !isLiked.value;
-};
-
-watch(
-    () => props.weather,
-    (newWeather) => {
-        const storedWeather = JSON.parse(localStorage.getItem('likedWeather') || '[]');
-        isLiked.value = storedWeather.some((item) => item.id === newWeather.id);
-    },
-    { immediate: true }
-);
-
 
 </script>
 
@@ -60,11 +37,8 @@ watch(
                 {{ isSingleDayForecast ? '5-day forecast' : '1-day forecast' }}
             </button>
 
-            <button @click="toggleLike">
-                <span v-if="isLiked">&#9829;</span>
-                <span v-else>&#9825;</span>
-                Like
-            </button>
+            <button-like :weather="props.weather" />
+
         </div>
     </div>
 </template>
@@ -96,30 +70,5 @@ watch(
 .weather-card__header p {
     margin: 0;
     color: #666;
-}
-
-.button-container {
-    margin-top: 16px;
-}
-
-button {
-    margin-right: 8px;
-    padding: 8px 16px;
-    border: none;
-    background-color: #007bff;
-    color: white;
-    cursor: pointer;
-}
-
-button:hover {
-    background-color: #0056b3;
-}
-
-/* Стили для сердечка */
-button span {
-    margin-right: 4px;
-    /* Отступ между иконкой и текстом */
-    font-size: 16px;
-    /* Размер иконки */
 }
 </style>
