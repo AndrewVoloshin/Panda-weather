@@ -21,8 +21,11 @@ onMounted(async () => {
 </script>
 
 <template>
-    <div v-for="(weather, index) in weatherStore.weatherCardList"
-         :key="index">
-        <weather-controller :weather="weather" />
+    <div class="weather-list">
+        <div class="weather-card"
+             v-for="(weather, index) in weatherStore.weatherCardList"
+             :key="index">
+            <weather-controller :weather="weather" />
+        </div>
     </div>
 </template>

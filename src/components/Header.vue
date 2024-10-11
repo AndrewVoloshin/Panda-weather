@@ -6,9 +6,11 @@
              class="logo" />
         <nav>
             <RouterLink to="/"
-                        class="nav-link">Home</RouterLink>
+                        class="nav-link"
+                        exact-active-class="active-link">Home</RouterLink>
             <RouterLink to="/about"
-                        class="nav-link">Favorite</RouterLink>
+                        class="nav-link"
+                        exact-active-class="active-link">Favorite</RouterLink>
         </nav>
     </header>
 </template>
@@ -36,9 +38,14 @@ nav {
 }
 
 .nav-link {
-    color: #333;
+    color: #3c3c3c;
     text-decoration: none;
     font-weight: bold;
+}
+
+.active-link {
+    color: #007bff; 
+    border-bottom: 2px solid #007bff; 
 }
 
 .nav-link:hover {

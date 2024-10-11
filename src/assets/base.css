@@ -16,3 +16,7 @@ body {
     sans-serif;
   font-size: 15px;
 }
+
+* {
+  box-sizing: border-box;
+}

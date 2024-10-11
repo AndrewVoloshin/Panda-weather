@@ -19,7 +19,7 @@ const toggleForecast = () => {
 </script>
 
 <template>
-    <div class="weather-card">
+    <div class="weather-card__container">
         <div class="weather-card__header">
             <h3>{{ weather.name }}</h3>
             <p>{{ weather.date }}</p>
@@ -42,13 +42,12 @@ const toggleForecast = () => {
 </template>
 
 <style scoped>
-.weather-card {
+.weather-card__container {
     background-color: #fff;
     border-radius: 10px;
     padding: 16px;
     box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
-    max-width: 300px;
-    margin: 10px;
+    margin: 10px 20px;
 }
 
 .weather-card__header {
