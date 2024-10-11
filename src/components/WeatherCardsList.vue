@@ -22,16 +22,19 @@ onMounted(async () => {
 
 <template>
     <div class="weather-list">
-        <div class="weather-card"
-             v-for="(weather, index) in weatherStore.weatherCardList"
-             :key="index">
-            <weather-controller :weather="weather" />
+        <div class="weather-container">
+            <div class="weather-card"
+                 v-for="(weather, index) in weatherStore.weatherCardList"
+                 :key="index">
+                <weather-controller :weather="weather" />
+            </div>
         </div>
+
     </div>
 </template>
 
 <style lang="css" scoped>
-.weather-list {
+.weather-container {
     display: flex;
     flex-direction: column;
     gap: 15px;
@@ -49,7 +52,7 @@ onMounted(async () => {
         width: 360px;
     }
 
-    .weather-list {
+    .weather-container {
         align-items: center;
     }
 }
@@ -57,32 +60,43 @@ onMounted(async () => {
 
 
 @media (min-width: 481px) {
-    .weather-list {
+    .weather-container {
         padding: 0 30px;
     }
 }
 
 
 @media (min-width: 769px) {
-    .weather-list {
+    .weather-container {
         padding: 10px 40px;
     }
 }
 
 @media (min-width: 815px) {
-    .weather-list {
-        flex-direction: row;
-        flex-wrap: wrap;
+    .weather-container {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(360px, 0fr));
         justify-content: center;
     }
+
 }
 
+
+@media (min-width: 1190px) {
+    .weather-container {}
+}
 
 
 
 
 @media (min-width: 1200px) {
     .weather-list {
+        display: flex;
+        justify-content: center;
+    }
+
+    .weather-container {
+        width: 1200px;
         padding: 10px 60px;
     }
 }
