@@ -45,8 +45,6 @@ onMounted(async () => {
     max-width: 360px;
 }
 
-
-
 @media (min-width: 400px) {
     .weather-card {
         width: 360px;
@@ -57,14 +55,11 @@ onMounted(async () => {
     }
 }
 
-
-
 @media (min-width: 481px) {
     .weather-container {
         padding: 0 30px;
     }
 }
-
 
 @media (min-width: 769px) {
     .weather-container {
@@ -78,16 +73,11 @@ onMounted(async () => {
         grid-template-columns: repeat(auto-fit, minmax(360px, 0fr));
         justify-content: center;
     }
-
 }
-
 
 @media (min-width: 1190px) {
     .weather-container {}
 }
-
-
-
 
 @media (min-width: 1200px) {
     .weather-list {
