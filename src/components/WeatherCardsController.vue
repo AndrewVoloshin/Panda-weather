@@ -47,7 +47,6 @@ const toggleForecast = () => {
     border-radius: 10px;
     padding: 16px;
     box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
-    margin: 10px 20px;
 }
 
 .weather-card__header {
@@ -66,4 +65,13 @@ const toggleForecast = () => {
     margin: 0;
     color: #666;
 }
+
+
+@media (min-width: 361px) {
+  
+}
+
+
+
+
 </style>

@@ -70,14 +70,13 @@ onBeforeUnmount(() => {
 <style scoped>
 .dropdown {
   position: relative;
-  max-width: 400px;
   margin: 0 auto;
   font-family: 'Inter', sans-serif;
   padding: 10px 20px;
 }
 
 input {
-  width: 320px;
+  width: 290px;
   padding: 10px;
   border: 1px solid #ddd;
   border-radius: 8px;
@@ -96,8 +95,7 @@ input:focus {
   top: 100%;
   left: 0;
   right: 0;
-  width: 320px;
-
+  width: 290px;
   background-color: #fff;
   border: 1px solid #ddd;
   border-radius: 8px;
@@ -122,5 +120,56 @@ input:focus {
 
 .suggestion:hover {
   background-color: #f5f5f5;
+}
+
+@media (min-width: 361px) {
+  .dropdown {
+    display: flex;
+    justify-content: center;
+  }
+
+  .suggestions {
+    left: 50%;
+    transform: translateX(-50%);
+    margin-left: 0px;
+  }
+}
+
+
+@media (min-width: 361px) {
+  .dropdown {
+    padding: 15px 30px;
+  }
+}
+
+
+
+@media (min-width: 481px) {
+  .dropdown {
+    padding: 10px 30px;
+  }
+}
+
+
+@media (min-width: 769px) {
+
+  .suggestions {
+    width: 450px;
+  }
+
+  .dropdown {
+    padding: 15px 40px;
+  }
+
+
+  input {
+    width: 450px;
+  }
+}
+
+@media (min-width: 1200px) {
+  .dropdown {
+    padding: 15px 60px;
+  }
 }
 </style>

@@ -29,3 +29,61 @@ onMounted(async () => {
         </div>
     </div>
 </template>
+
+<style lang="css" scoped>
+.weather-list {
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+    padding: 0 20px;
+}
+
+.weather-card {
+    max-width: 360px;
+}
+
+
+
+@media (min-width: 400px) {
+    .weather-card {
+        width: 360px;
+    }
+
+    .weather-list {
+        align-items: center;
+    }
+}
+
+
+
+@media (min-width: 481px) {
+    .weather-list {
+        padding: 0 30px;
+    }
+}
+
+
+@media (min-width: 769px) {
+    .weather-list {
+        padding: 10px 40px;
+    }
+}
+
+@media (min-width: 815px) {
+    .weather-list {
+        flex-direction: row;
+        flex-wrap: wrap;
+        justify-content: center;
+    }
+}
+
+
+
+
+
+@media (min-width: 1200px) {
+    .weather-list {
+        padding: 10px 60px;
+    }
+}
+</style>

@@ -44,11 +44,30 @@ nav {
 }
 
 .active-link {
-    color: #007bff; 
-    border-bottom: 2px solid #007bff; 
+    color: #007bff;
+    border-bottom: 2px solid #007bff;
 }
 
 .nav-link:hover {
     color: #007bff;
+}
+
+@media (min-width: 481px) {
+    header {
+        padding: 10px 30px;
+    }
+}
+
+
+@media (min-width: 769px) {
+    header {
+        padding: 10px 40px;
+    }
+}
+
+@media (min-width: 1200px) {
+    header {
+        padding: 10px 60px;
+    }
 }
 </style>
