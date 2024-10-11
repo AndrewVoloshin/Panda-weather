@@ -1,6 +1,4 @@
 <template>
-  <div class="about">
-    <h1>Saved Weather Cards</h1>
     <div class="weather-cards">
 
       <div v-if="savedWeather.length === 0">
@@ -13,7 +11,6 @@
                             :weather="weather" />
       </div>
     </div>
-  </div>
 </template>
 
 <script setup lang="ts">
@@ -34,9 +31,5 @@ onMounted(() => {
 </script>
 
 <style scoped>
-.about {
-  padding: 20px;
-}
-
 
 </style>
