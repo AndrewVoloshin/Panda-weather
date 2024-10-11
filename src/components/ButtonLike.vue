@@ -9,7 +9,6 @@
 <script setup lang="ts">
 import { ref, watch } from 'vue';
 
-
 const props = defineProps({
     weather: {
         type: Object,
@@ -19,10 +18,14 @@ const props = defineProps({
 
 const isLiked = ref(false);
 
-
 const toggleLike = () => {
     const weatherId = props.weather.id;
     const storedWeather = JSON.parse(localStorage.getItem('likedWeather') || '[]');
+
+    if (!isLiked.value && storedWeather.length >= 5) {
+        alert('Вы не можете лайкнуть больше 5 элементов.');
+        return;
+    }
 
     if (isLiked.value) {
         const updatedWeather = storedWeather.filter((item) => item.id !== weatherId);
