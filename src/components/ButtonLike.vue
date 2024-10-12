@@ -1,9 +1,13 @@
 <template>
-    <button @click="toggleLike">
-        <span v-if="isLiked">&#9829;</span>
-        <span v-else>&#9825;</span>
-        Like
-    </button>
+    <div class="button-like"
+         @click="toggleLike">
+        <img v-if="isLiked"
+             src="/src/assets/svg/heart-solid.svg"
+             alt="">
+        <img v-else
+             src="/src/assets/svg/heart-regular.svg"
+             alt="">
+    </div>
 </template>
 
 <script setup lang="ts">
@@ -52,6 +56,21 @@ watch(
 <style scoped>
 .button-container {
     margin-top: 16px;
+}
+
+.button-like {
+    display: inline-block;
+    position: relative;
+    width: 25px;
+    height: 25px;
+}
+
+.button-like img {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
 }
 
 /* button {

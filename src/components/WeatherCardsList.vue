@@ -1,21 +1,11 @@
 <script setup lang="ts">
-import { onMounted } from 'vue'
 import WeatherController from './WeatherCardsController.vue'
-import { useWeatherStore } from '@/stores/weather'
-import { getWeatherMyPosition } from '@/composable/getMyLocation'
 
-const weatherStore = useWeatherStore()
-
-const addWeatherToList = (weatherData) => {
-    if (!weatherData) return
-    weatherStore.weatherCardList.push(weatherData)
-}
-
-onMounted(async () => {
-    if (weatherStore.isGetMyLocation) return
-    weatherStore.isGetMyLocation = true
-    const weatherMyPosition = await getWeatherMyPosition()
-    addWeatherToList(weatherMyPosition)
+const props = defineProps({
+    weatherCards: {
+        type: Object,
+        required: true,
+    },
 });
 
 </script>
@@ -24,12 +14,12 @@ onMounted(async () => {
     <div class="weather-list">
         <div class="weather-container">
             <div class="weather-card"
-                 v-for="(weather, index) in weatherStore.weatherCardList"
+                 v-for="(weather, index) in props.weatherCards"
                  :key="index">
-                <weather-controller :weather="weather" />
+                <weather-controller :weatherCards="weatherCards"
+                                    :weather="weather" />
             </div>
         </div>
-
     </div>
 </template>
 

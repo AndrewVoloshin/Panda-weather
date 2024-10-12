@@ -7,7 +7,6 @@ export const getMyLocation = async (): Promise<{ lat: string; lon: string } | nu
             navigator.geolocation.getCurrentPosition(
                 (position) => {
                     const { latitude, longitude } = position.coords;
-                    console.log(position.coords);
                     resolve({ lat: latitude.toString(), lon: longitude.toString() });
                 },
                 (error) => {

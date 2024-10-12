@@ -3,12 +3,17 @@ import { ref } from 'vue';
 import WeatherCard from './WeatherCard.vue';
 import WeatherCardFiveDays from './WeatherCardFiveDays.vue';
 import ButtonLike from './ButtonLike.vue';
+import ButtonDelete from './ButtonDelete.vue';
 
 const props = defineProps({
     weather: {
         type: Object,
         required: true,
     },
+    weatherCards: {
+        type: Object,
+        required: true,
+    }
 });
 
 const isSingleDayForecast = ref(true);
@@ -30,12 +35,26 @@ const toggleForecast = () => {
         <weather-card-five-days v-else
                                 :weather="props.weather" />
 
+
+
         <div class="button-container">
-            <button @click="toggleForecast">
-                {{ isSingleDayForecast ? '5-day forecast' : '1-day forecast' }}
-            </button>
+
+            <button-delete :weatherCards="weatherCards"
+                           :weather="props.weather" />
+
+            <div class="button-forecast"
+                 @click="toggleForecast">
+                <img v-if="isSingleDayForecast"
+                     src="/src/assets/svg/arrow-down-solid.svg"
+                     alt="">
+                <img v-else
+                     src="/src/assets/svg/arrow-up-solid.svg"
+                     alt="">
+            </div>
 
             <button-like :weather="props.weather" />
+
+
 
         </div>
     </div>
@@ -44,9 +63,16 @@ const toggleForecast = () => {
 <style scoped>
 .weather-card__container {
     background-color: #fff;
-    border-radius: 10px;
-    padding: 16px;
-    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+    border-radius: 12px;
+    padding: 20px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+    max-width: 320px;
+    margin: 15px auto;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.weather-card__container:hover {
+    box-shadow: 0 6px 18px rgba(0, 0, 0, 0.2);
 }
 
 .weather-card__header {
@@ -66,12 +92,24 @@ const toggleForecast = () => {
     color: #666;
 }
 
-
-@media (min-width: 361px) {
-  
+.button-forecast {
+    display: inline-block;
+    position: relative;
+    width: 25px;
+    height: 25px;
 }
 
+.button-forecast img {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+}
 
-
-
+.button-container {
+    display: flex;
+    justify-content: space-between;
+    margin-top: 15px;
+}
 </style>

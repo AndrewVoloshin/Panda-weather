@@ -11,7 +11,7 @@
                 <RouterLink to="/"
                             class="nav-link"
                             exact-active-class="active-link">Home</RouterLink>
-                <RouterLink to="/about"
+                <RouterLink to="/favorite"
                             class="nav-link"
                             exact-active-class="active-link">Favorite</RouterLink>
             </nav>
@@ -48,18 +48,18 @@ nav {
 }
 
 .nav-link {
-    color: #3c3c3c;
+    color: #555;
     text-decoration: none;
     font-weight: bold;
 }
 
 .active-link {
-    color: #007bff;
-    border-bottom: 2px solid #007bff;
+    color: #333;
+    border-bottom: 2px solid #333;
 }
 
 .nav-link:hover {
-    color: #007bff;
+    color: #333;
 }
 
 @media (min-width: 481px) {
