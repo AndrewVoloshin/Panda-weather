@@ -31,9 +31,16 @@ const toggleForecast = () => {
                                 :weather="props.weather" />
 
         <div class="button-container">
-            <button @click="toggleForecast">
-                {{ isSingleDayForecast ? '5-day forecast' : '1-day forecast' }}
-            </button>
+
+            <div class="button-forecast"
+                 @click="toggleForecast">
+                <img v-if="isSingleDayForecast"
+                     src="/src/assets/svg/arrow-down-solid.svg"
+                     alt="">
+                <img v-else
+                     src="/src/assets/svg/arrow-up-solid.svg"
+                     alt="">
+            </div>
 
             <button-like :weather="props.weather" />
 
@@ -66,12 +73,23 @@ const toggleForecast = () => {
     color: #666;
 }
 
+.button-forecast {
+    display: inline-block;
+    position: relative;
+    width: 25px;
+    height: 25px;
+}
 
-@media (min-width: 361px) {
-  
+.button-forecast img {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
 }
 
 
 
 
+@media (min-width: 361px) {}
 </style>

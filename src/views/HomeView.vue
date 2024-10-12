@@ -7,16 +7,16 @@ import { getWeatherMyPosition } from '@/composable/getMyLocation'
 
 const weatherStore = useWeatherStore()
 
-const addWeatherToList = (weatherData) => {
-  if (!weatherData) return
-  weatherStore.weatherCardList.push(weatherData)
-}
-
-onMounted(async () => {
+const addWeatherByPositionToStore = async () => {
   if (weatherStore.isGetMyLocation) return
   weatherStore.isGetMyLocation = true
   const weatherMyPosition = await getWeatherMyPosition()
-  addWeatherToList(weatherMyPosition)
+  if (!weatherMyPosition) return
+  weatherStore.weatherCardList.push(weatherMyPosition)
+}
+
+onMounted(async () => {
+  addWeatherByPositionToStore()
 });
 </script>
 

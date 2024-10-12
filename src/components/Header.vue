@@ -11,7 +11,7 @@
                 <RouterLink to="/"
                             class="nav-link"
                             exact-active-class="active-link">Home</RouterLink>
-                <RouterLink to="/about"
+                <RouterLink to="/favorite"
                             class="nav-link"
                             exact-active-class="active-link">Favorite</RouterLink>
             </nav>

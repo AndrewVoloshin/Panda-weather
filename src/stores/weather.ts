@@ -21,10 +21,6 @@ export const useWeatherStore = defineStore('weather', () => {
     weatherCardList.push(weather)
   })
 
-
-
-
-
+  
   return { isGetMyLocation, citySelected, weatherCity, weatherCardList }
-
 })
