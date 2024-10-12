@@ -66,8 +66,7 @@ const toggleForecast = () => {
     border-radius: 12px;
     padding: 20px;
     box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
-    max-width: 320px;
-    margin: 15px auto;
+    /* margin: 15px auto; */
     transition: transform 0.3s ease, box-shadow 0.3s ease;
 }
 
@@ -111,5 +110,20 @@ const toggleForecast = () => {
     display: flex;
     justify-content: space-between;
     margin-top: 15px;
+}
+
+@media (max-width: 400px) {
+    .weather-card__container {
+        max-width: 320px;
+    }
+
+}
+
+
+@media (min-width: 815px) {
+    .weather-card__container {
+        width: 420px;
+    }
+
 }
 </style>

@@ -21,11 +21,11 @@ const props = defineProps({
 const temperatureChart = ref(null);
 
 const setupChartInstance = (forecast24) => {
-    if (!forecast24) return
-    const forecast24Temperature = forecast24.map(o => o.temperature)
-    const forecast24Time = forecast24.map(o => o.time)
-    const minTemperature = Math.floor(Math.min(...forecast24Temperature))
-    const maxTemperature = Math.floor(Math.max(...forecast24Temperature))
+    if (!forecast24) return;
+    const forecast24Temperature = forecast24.map(o => o.temperature);
+    const forecast24Time = forecast24.map(o => o.time);
+    const minTemperature = Math.floor(Math.min(...forecast24Temperature));
+    const maxTemperature = Math.floor(Math.max(...forecast24Temperature));
 
     if (temperatureChart.value) {
         const chartInstance = new Chart(temperatureChart.value, {
@@ -44,6 +44,11 @@ const setupChartInstance = (forecast24) => {
             options: {
                 responsive: true,
                 scales: {
+                    x: {
+                        grid: {
+                            display: false
+                        }
+                    },
                     y: {
                         ticks: {
                             callback: function (value) {
@@ -51,7 +56,10 @@ const setupChartInstance = (forecast24) => {
                             }
                         },
                         min: minTemperature > 0 ? 0 : minTemperature,
-                        suggestedMax: maxTemperature
+                        suggestedMax: maxTemperature,
+                        grid: {
+                            display: false
+                        }
                     }
                 }
             }
@@ -60,7 +68,8 @@ const setupChartInstance = (forecast24) => {
             chartInstance.resize();
         });
     }
-}
+};
+
 
 onMounted(async () => {
     const forecast24 = await getForecastForNext24Hours(props.weather.coord);

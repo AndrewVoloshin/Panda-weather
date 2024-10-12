@@ -18,7 +18,7 @@ export const useWeatherStore = defineStore('weather', () => {
     const weather = await getWeatherByCityCoordinates(coordinates);
     if (!weather) return
     Object.assign(weatherCity, weather);
-    weatherCards.push(weather)
+    weatherCards.unshift(weather)
     console.log(weatherCards, 'useWeatherStore');
   })
 
