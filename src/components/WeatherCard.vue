@@ -1,4 +1,8 @@
 <script setup lang="ts">
+import { ref, onMounted } from 'vue'
+import Loader from './Loader.vue';
+import { useWeatherStore } from '@/stores/weather'
+
 const props = defineProps({
   weather: {
     type: Object,
@@ -6,14 +10,26 @@ const props = defineProps({
   }
 });
 
+const weatherStore = useWeatherStore()
+
 const getIconUrl = (iconCode: string) => {
   return `http://openweathermap.org/img/wn/${iconCode}@2x.png`;
-}
+};
+
+onMounted(() => {
+  weatherStore.stopLoading()
+})
+
+
 </script>
 
 <template>
   <div class="weather-card">
-    <div class="weather-card__body">
+
+    <Loader v-if="weatherStore.isLoading" />
+
+    <div v-else
+         class="weather-card__body">
       <div class="weather-card__temperature">
         <span>{{ Math.floor(weather.main.temp) }}°C</span>
         <img :src="getIconUrl(weather.weather[0].icon)"
@@ -29,7 +45,7 @@ const getIconUrl = (iconCode: string) => {
 </template>
 
 <style scoped>
-
+/* Стили остаются теми же, что и были */
 .weather-card__body {
   display: flex;
   flex-direction: column;
@@ -39,9 +55,9 @@ const getIconUrl = (iconCode: string) => {
 .weather-card__temperature {
   display: flex;
   align-items: center;
-  font-size: 36px; 
+  font-size: 36px;
   font-weight: 600;
-  color: #333; 
+  color: #333;
 }
 
 .weather-card__temperature img {
@@ -52,7 +68,7 @@ const getIconUrl = (iconCode: string) => {
 
 .weather-card__details {
   font-size: 16px;
-  color: #555; 
+  color: #555;
   margin-top: 10px;
   text-align: center;
 }
@@ -61,7 +77,7 @@ const getIconUrl = (iconCode: string) => {
   margin-bottom: 8px;
   font-size: 18px;
   font-weight: 500;
-  color: #555; 
+  color: #555;
 }
 
 .weather-card__description:first-letter {
