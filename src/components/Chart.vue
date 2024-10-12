@@ -36,7 +36,7 @@ const setupChartInstance = (forecast24) => {
                     label: 'Температура (°C)',
                     data: forecast24Temperature,
                     borderColor: 'rgba(75, 192, 192, 1)',
-                    backgroundColor: 'rgba(75, 192, 192, 0.2)',
+                    backgroundColor: 'rgba(208, 244, 244, 0.2)',
                     fill: true,
                     tension: 0.1,
                 }]

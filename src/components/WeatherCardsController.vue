@@ -48,13 +48,13 @@ const toggleForecast = () => {
             <div class="button-forecast"
                  @click="toggleForecast">
                 <img v-if="isSingleDayForecast"
-                     src="/src/assets/svg/arrow-down-solid.svg"
+                     src="/src/assets/svg/chevron-down-solid.svg"
                      alt="">
                 <img v-else
-                     src="/src/assets/svg/arrow-up-solid.svg"
+                     src="/src/assets/svg/chevron-up-solid.svg"
                      alt="">
             </div>
-
+            <!-- 147 227 227 -->
             <button-like :weather="props.weather" />
         </div>
     </div>
