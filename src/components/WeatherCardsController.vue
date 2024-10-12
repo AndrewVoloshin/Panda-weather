@@ -4,6 +4,7 @@ import WeatherCard from './WeatherCard.vue';
 import WeatherCardFiveDays from './WeatherCardFiveDays.vue';
 import ButtonLike from './ButtonLike.vue';
 import ButtonDelete from './ButtonDelete.vue';
+import Chart from './Chart.vue'
 
 const props = defineProps({
     weather: {
@@ -36,6 +37,8 @@ const toggleForecast = () => {
                                 :weather="props.weather" />
 
 
+        <chart :weather="props.weather" />
+
 
         <div class="button-container">
 
@@ -53,9 +56,6 @@ const toggleForecast = () => {
             </div>
 
             <button-like :weather="props.weather" />
-
-
-
         </div>
     </div>
 </template>
