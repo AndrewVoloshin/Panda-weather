@@ -14,5 +14,5 @@ onMounted(() => {
 </script>
 
 <template>
-  <weather-cards-list :weather="savedWeather" />
+  <weather-cards-list :weatherCards="savedWeather" />
 </template>

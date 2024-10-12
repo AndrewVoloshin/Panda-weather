@@ -31,7 +31,7 @@ const addCity = () => {
   searchTerm.value = '';
 }
 
-const checkWeatherCardLimit = () => weatherStore.weatherCardList.length < 5;
+const checkWeatherCardLimit = () => weatherStore.weatherCards.length < 5;
 
 const handleClickOutside = (event: MouseEvent): void => {
   const dropdownElement = document.querySelector('.dropdown') as HTMLElement;

@@ -12,7 +12,7 @@ const addWeatherByPositionToStore = async () => {
   weatherStore.isGetMyLocation = true
   const weatherMyPosition = await getWeatherMyPosition()
   if (!weatherMyPosition) return
-  weatherStore.weatherCardList.push(weatherMyPosition)
+  weatherStore.weatherCards.push(weatherMyPosition)
 }
 
 onMounted(async () => {
@@ -22,5 +22,5 @@ onMounted(async () => {
 
 <template>
   <input-city />
-  <weather-cards-list :weather="weatherStore.weatherCardList" />
+  <weather-cards-list :weatherCards="weatherStore.weatherCards" />
 </template>

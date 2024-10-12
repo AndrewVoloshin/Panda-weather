@@ -9,7 +9,7 @@ export const useWeatherStore = defineStore('weather', () => {
   const isGetMyLocation = ref(false);
   const citySelected = ref('')
   const weatherCity = reactive({});
-  const weatherCardList = reactive([])
+  const weatherCards = reactive([])
 
   watch(citySelected, async (newCity) => {
     if (!newCity) return
@@ -18,9 +18,10 @@ export const useWeatherStore = defineStore('weather', () => {
     const weather = await getWeatherByCityCoordinates(coordinates);
     if (!weather) return
     Object.assign(weatherCity, weather);
-    weatherCardList.push(weather)
+    weatherCards.push(weather)
+    console.log(weatherCards, 'useWeatherStore');
   })
 
-  
-  return { isGetMyLocation, citySelected, weatherCity, weatherCardList }
+
+  return { isGetMyLocation, citySelected, weatherCity, weatherCards }
 })
