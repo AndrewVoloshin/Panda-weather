@@ -60,13 +60,18 @@ const props = defineProps({
 @media (min-width: 815px) {
     .weather-container {
         display: grid;
-        grid-template-columns: repeat(auto-fit, minmax(360px, 0fr));
+        grid-template-columns: repeat(auto-fit, minmax(420px, 0fr));
         justify-content: center;
+        gap: 20px;
     }
 }
 
 @media (min-width: 1190px) {
     .weather-container {}
+
+    .weather-card {
+        width: 400px;
+    }
 }
 
 @media (min-width: 1200px) {

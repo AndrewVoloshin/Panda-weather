@@ -4,6 +4,7 @@ import WeatherCard from './WeatherCard.vue';
 import WeatherCardFiveDays from './WeatherCardFiveDays.vue';
 import ButtonLike from './ButtonLike.vue';
 import ButtonDelete from './ButtonDelete.vue';
+import Chart from './Chart.vue'
 
 const props = defineProps({
     weather: {
@@ -36,6 +37,8 @@ const toggleForecast = () => {
                                 :weather="props.weather" />
 
 
+        <chart :weather="props.weather" />
+
 
         <div class="button-container">
 
@@ -45,17 +48,14 @@ const toggleForecast = () => {
             <div class="button-forecast"
                  @click="toggleForecast">
                 <img v-if="isSingleDayForecast"
-                     src="/src/assets/svg/arrow-down-solid.svg"
+                     src="/src/assets/svg/chevron-down-solid.svg"
                      alt="">
                 <img v-else
-                     src="/src/assets/svg/arrow-up-solid.svg"
+                     src="/src/assets/svg/chevron-up-solid.svg"
                      alt="">
             </div>
-
+            <!-- 147 227 227 -->
             <button-like :weather="props.weather" />
-
-
-
         </div>
     </div>
 </template>
@@ -66,8 +66,7 @@ const toggleForecast = () => {
     border-radius: 12px;
     padding: 20px;
     box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
-    max-width: 320px;
-    margin: 15px auto;
+    /* margin: 15px auto; */
     transition: transform 0.3s ease, box-shadow 0.3s ease;
 }
 
@@ -111,5 +110,20 @@ const toggleForecast = () => {
     display: flex;
     justify-content: space-between;
     margin-top: 15px;
+}
+
+@media (max-width: 400px) {
+    .weather-card__container {
+        max-width: 320px;
+    }
+
+}
+
+
+@media (min-width: 815px) {
+    .weather-card__container {
+        width: 420px;
+    }
+
 }
 </style>
