@@ -1,27 +1,38 @@
-import { ref, computed, watch, reactive } from 'vue'
+import { ref, watch, reactive } from 'vue'
 import { defineStore } from 'pinia'
-
 import { getCityCoordinates } from '@/composable/getCityCoordinates'
 import { getWeatherByCityCoordinates } from '@/composable/getWeatherByCityCoordinates'
 
 export const useWeatherStore = defineStore('weather', () => {
-
-  const isGetMyLocation = ref(false);
+  const isGetMyLocation = ref(false)
   const citySelected = ref('')
-  const weatherCity = reactive({});
   const weatherCards = reactive([])
+  const isLoading = ref(false)
 
-  watch(citySelected, async (newCity) => {
+  const startLoading = () => {
+    isLoading.value = true
+  }
+  const stopLoading = () => {
+    isLoading.value = false
+  }
+
+  const addWeatherToCardByInput = async (newCity) => {
+    startLoading()
     if (!newCity) return
-    const coordinates = await getCityCoordinates(newCity);
+    const coordinates = await getCityCoordinates(newCity)
+
     if (!coordinates) return
-    const weather = await getWeatherByCityCoordinates(coordinates);
+    const weather = await getWeatherByCityCoordinates(coordinates)
+
     if (!weather) return
-    Object.assign(weatherCity, weather);
     weatherCards.unshift(weather)
-    console.log(weatherCards, 'useWeatherStore');
-  })
+    // weatherCards.push(weather)
 
 
-  return { isGetMyLocation, citySelected, weatherCity, weatherCards }
+    stopLoading()
+  }
+
+  watch(citySelected, addWeatherToCardByInput)
+
+  return { isGetMyLocation, citySelected, weatherCards, isLoading, startLoading, stopLoading }
 })

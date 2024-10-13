@@ -54,7 +54,6 @@ const toggleForecast = () => {
                      src="/src/assets/svg/chevron-up-solid.svg"
                      alt="">
             </div>
-            <!-- 147 227 227 -->
             <button-like :weather="props.weather" />
         </div>
     </div>
@@ -66,7 +65,6 @@ const toggleForecast = () => {
     border-radius: 12px;
     padding: 20px;
     box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
-    /* margin: 15px auto; */
     transition: transform 0.3s ease, box-shadow 0.3s ease;
 }
 
