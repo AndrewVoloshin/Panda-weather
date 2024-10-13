@@ -33,12 +33,11 @@ const toggleForecast = () => {
 
         <weather-card v-if="isSingleDayForecast"
                       :weather="props.weather" />
+
         <weather-card-five-days v-else
                                 :weather="props.weather" />
 
-
         <chart :weather="props.weather" />
-
 
         <div class="button-container">
 

@@ -26,8 +26,6 @@ export const useWeatherStore = defineStore('weather', () => {
 
     if (!weather) return
     weatherCards.unshift(weather)
-    // weatherCards.push(weather)
-
 
     stopLoading()
   }
