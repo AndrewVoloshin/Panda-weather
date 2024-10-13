@@ -16,10 +16,6 @@ const getIconUrl = (iconCode: string) => {
   return `http://openweathermap.org/img/wn/${iconCode}@2x.png`;
 };
 
-onMounted(() => {
-  weatherStore.stopLoading()
-})
-
 
 </script>
 

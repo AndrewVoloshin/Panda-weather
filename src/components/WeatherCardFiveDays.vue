@@ -1,6 +1,7 @@
 <script setup lang="ts">
-import { reactive, onMounted } from 'vue';
-import { getWeatherByCityCoordinates } from '@/composable/getWeatherByCityCoordinates'
+import { reactive, ref, onMounted } from 'vue';
+import Loader from './Loader.vue';
+import { getWeatherByCityCoordinates } from '@/composable/getWeatherByCityCoordinates';
 
 const props = defineProps({
   weather: {
@@ -9,20 +10,24 @@ const props = defineProps({
   }
 });
 
-const forecast = reactive<{ date: string, avgTemp: number, iconUrl: string, description: string }[]>([])
+const forecast = reactive<{ date: string, avgTemp: number, iconUrl: string, description: string }[]>([]);
+
+const isLoading = ref(true);
 
 onMounted(() => {
   getForecastFiveDays();
 });
 
 const getForecastFiveDays = async () => {
+  isLoading.value = true;
+
   const weatherForecast = await getWeatherByCityCoordinates(props.weather.coord, 'forecast');
   console.log('weatherForecast=>', weatherForecast);
 
   const groupedByDays = weatherForecast.list.reduce((acc: any, current: any) => {
     const date = current.dt_txt.split(' ')[0];
     if (!acc[date]) {
-      acc[date] = { temps: [], avgTemp: 0, icon: current.weather[0].icon, description: current.weather[0].description }; 
+      acc[date] = { temps: [], avgTemp: 0, icon: current.weather[0].icon, description: current.weather[0].description };
     }
     acc[date].temps.push(current.main.temp);
     return acc;
@@ -47,37 +52,35 @@ const getForecastFiveDays = async () => {
     iconUrl: `http://openweathermap.org/img/wn/${groupedByDays[date].icon}@2x.png`,
     description: groupedByDays[date].description
   })));
-}
+
+  isLoading.value = false;
+};
 </script>
 
 <template>
   <div class="forecast-container minimal">
-    <ul class="forecast-list">
+
+    <Loader v-if="isLoading" />
+
+    <ul v-else
+        class="forecast-list">
       <li v-for="day in forecast"
           :key="day.date"
           class="forecast-item">
         <div class="forecast-item__container">
           <span class="forecast-date">
-            {{ new Date(day.date).toLocaleDateString('uk-UA', {
-              weekday: 'short',
-              day: 'numeric',
-              month: 'numeric'
-            }) }}
+            {{ new Date(day.date).toLocaleDateString('uk-UA', { weekday: 'short', day: 'numeric', month: 'numeric' }) }}
           </span>
           <img :src="day.iconUrl"
                alt="weather icon"
                class="forecast-icon" />
-
           <span class="forecast-temp">{{ day.avgTemp.toFixed(1) }} °C</span>
         </div>
-
         <div class="forecast-desc">{{ day.description }}</div>
-
       </li>
     </ul>
   </div>
 </template>
-
 
 <style scoped>
 .forecast-item__container {
