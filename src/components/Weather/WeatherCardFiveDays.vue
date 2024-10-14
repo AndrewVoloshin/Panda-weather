@@ -1,6 +1,6 @@
 <script setup lang="ts">
 import { reactive, ref, onMounted, watch } from 'vue';
-import Loader from './Loader.vue';
+import Loader from '@/components/UI/Loader.vue';
 import { getWeatherByCityCoordinates } from '@/composable/getWeatherByCityCoordinates';
 
 const props = defineProps({

@@ -1,12 +1,11 @@
 <script setup lang="ts">
 import { ref } from 'vue';
-import WeatherCard from './WeatherCard.vue';
-import WeatherCardFiveDays from './WeatherCardFiveDays.vue';
-import ButtonLike from './ButtonLike.vue';
-import ButtonDelete from './ButtonDelete.vue';
-import ButtonSwitchForecast from './ButtonSwitchForecast.vue';
-
-import Chart from './Chart.vue'
+import WeatherCard from '@/components/Weather/WeatherCard.vue';
+import WeatherCardFiveDays from '@/components/Weather/WeatherCardFiveDays.vue';
+import ButtonLike from '@/components/UI/ButtonLike.vue';
+import ButtonDelete from '@/components/UI/ButtonDelete.vue';
+import ButtonSwitchForecast from '@/components/UI/ButtonSwitchForecast.vue';
+import Chart from '@/components/Chart.vue'
 
 const props = defineProps({
     weather: {
