@@ -15,7 +15,7 @@ const props = defineProps({
         <div class="weather-container">
             <div class="weather-card"
                  v-for="(weather, index) in props.weatherCards"
-                 :key="index">
+                 :key="weather.id">
                 <weather-controller :weatherCards="weatherCards"
                                     :weather="weather" />
             </div>
@@ -67,8 +67,6 @@ const props = defineProps({
 }
 
 @media (min-width: 1190px) {
-    .weather-container {}
-
     .weather-card {
         width: 400px;
     }
