@@ -1,6 +1,6 @@
 <script setup lang="ts">
 import { ref, onMounted } from 'vue'
-import Loader from './Loader.vue';
+import Loader from '@/components/UI/Loader.vue';
 import { useWeatherStore } from '@/stores/weather'
 
 const props = defineProps({
@@ -41,7 +41,6 @@ const getIconUrl = (iconCode: string) => {
 </template>
 
 <style scoped>
-/* Стили остаются теми же, что и были */
 .weather-card__body {
   display: flex;
   flex-direction: column;
