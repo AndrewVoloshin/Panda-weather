@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { reactive, ref, onMounted } from 'vue';
+import { reactive, ref, onMounted, watch } from 'vue';
 import Loader from './Loader.vue';
 import { getWeatherByCityCoordinates } from '@/composable/getWeatherByCityCoordinates';
 
@@ -22,7 +22,6 @@ const getForecastFiveDays = async () => {
   isLoading.value = true;
 
   const weatherForecast = await getWeatherByCityCoordinates(props.weather.coord, 'forecast');
-  console.log('weatherForecast=>', weatherForecast);
 
   const groupedByDays = weatherForecast.list.reduce((acc: any, current: any) => {
     const date = current.dt_txt.split(' ')[0];
@@ -39,8 +38,6 @@ const getForecastFiveDays = async () => {
     delete groupedByDays[lastDate];
   }
 
-  console.log('groupedByDays =>', groupedByDays);
-
   for (const day in groupedByDays) {
     const temps = groupedByDays[day].temps;
     groupedByDays[day].avgTemp = temps.reduce((sum: number, temp: number) => sum + temp, 0) / temps.length;
@@ -55,11 +52,14 @@ const getForecastFiveDays = async () => {
 
   isLoading.value = false;
 };
+
+
+watch(() => props.weather, getForecastFiveDays);
+
 </script>
 
 <template>
   <div class="forecast-container minimal">
-
     <Loader v-if="isLoading" />
 
     <ul v-else

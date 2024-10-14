@@ -4,6 +4,8 @@ import WeatherCard from './WeatherCard.vue';
 import WeatherCardFiveDays from './WeatherCardFiveDays.vue';
 import ButtonLike from './ButtonLike.vue';
 import ButtonDelete from './ButtonDelete.vue';
+import ButtonSwitchForecast from './ButtonSwitchForecast.vue';
+
 import Chart from './Chart.vue'
 
 const props = defineProps({
@@ -19,9 +21,10 @@ const props = defineProps({
 
 const isSingleDayForecast = ref(true);
 
-const toggleForecast = () => {
+const handleToggleForecast = () => {
     isSingleDayForecast.value = !isSingleDayForecast.value;
 };
+
 </script>
 
 <template>
@@ -33,27 +36,19 @@ const toggleForecast = () => {
 
         <weather-card v-if="isSingleDayForecast"
                       :weather="props.weather" />
+
         <weather-card-five-days v-else
                                 :weather="props.weather" />
 
-
         <chart :weather="props.weather" />
-
 
         <div class="button-container">
 
             <button-delete :weatherCards="weatherCards"
                            :weather="props.weather" />
 
-            <div class="button-forecast"
-                 @click="toggleForecast">
-                <img v-if="isSingleDayForecast"
-                     src="/src/assets/svg/chevron-down-solid.svg"
-                     alt="">
-                <img v-else
-                     src="/src/assets/svg/chevron-up-solid.svg"
-                     alt="">
-            </div>
+            <button-switch-forecast @toggle="handleToggleForecast" />
+
             <button-like :weather="props.weather" />
         </div>
     </div>
@@ -89,21 +84,6 @@ const toggleForecast = () => {
     color: #666;
 }
 
-.button-forecast {
-    display: inline-block;
-    position: relative;
-    width: 25px;
-    height: 25px;
-}
-
-.button-forecast img {
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-}
-
 .button-container {
     display: flex;
     justify-content: space-between;
@@ -114,7 +94,6 @@ const toggleForecast = () => {
     .weather-card__container {
         max-width: 320px;
     }
-
 }
 
 
@@ -122,6 +101,5 @@ const toggleForecast = () => {
     .weather-card__container {
         width: 420px;
     }
-
 }
 </style>
