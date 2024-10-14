@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import WeatherController from './WeatherCardsController.vue'
+import WeatherController from '@/components/Weather/WeatherCardsController.vue'
 
 const props = defineProps({
     weatherCards: {
@@ -14,7 +14,7 @@ const props = defineProps({
     <div class="weather-list">
         <div class="weather-container">
             <div class="weather-card"
-                 v-for="(weather, index) in props.weatherCards"
+                 v-for="weather in props.weatherCards"
                  :key="weather.id">
                 <weather-controller :weatherCards="weatherCards"
                                     :weather="weather" />

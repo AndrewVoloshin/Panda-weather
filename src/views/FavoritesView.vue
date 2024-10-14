@@ -1,6 +1,6 @@
 <script setup lang="ts">
 import { ref, onMounted } from 'vue';
-import WeatherCardsList from '@/components/WeatherCardsList.vue';
+import WeatherCardsList from '@/components/Weather/WeatherCardsList.vue';
 
 const savedWeather = ref([]);
 
