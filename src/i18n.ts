@@ -2,35 +2,23 @@ import { createI18n } from 'vue-i18n';
 
 const messages = {
     en: {
-        weather: {
-            city: 'City',
-            date: 'Date',
-            temperature: 'Temperature',
-            description: 'Description',
-            forecast: '5-Day Forecast',
-            like: 'Like',
-            delete: 'Delete',
+        header: {
+            home: 'Home',
+            favorite: 'Favorite',
         },
     },
     uk: {
-        weather: {
-            city: 'Місто',
-            date: 'Дата',
-            temperature: 'Температура',
-            description: 'Опис',
-            forecast: 'Прогноз на 5 днів',
-            like: 'Лайк',
-            delete: 'Видалити',
+        header: {
+            home: 'Головна',
+            favorite: 'Улюблене',
         },
     },
 };
 
 const i18n = createI18n({
-    // locale: 'en',
-    // fallbackLocale: 'uk',
-    locale: 'uk',
-    fallbackLocale: 'en',
+    locale: 'en',
+    fallbackLocale: 'uk',
     messages,
 });
-
+// <h1> {{ $t('weather.city') }}</h1>
 export default i18n;

@@ -1,7 +1,7 @@
 <script setup lang="ts">
 import { onMounted } from 'vue'
-import InputCity from '../components/Weather/InputCity.vue';
-import WeatherCardsList from '@/components/Weather/WeatherCardsList.vue';
+import InputCity from '@/components/Weather/InputCity.vue'
+import WeatherCardsList from '@/components/Weather/WeatherCardsList.vue'
 import { useWeatherStore } from '@/stores/weather'
 import { getWeatherMyPosition } from '@/composable/getMyLocation'
 
