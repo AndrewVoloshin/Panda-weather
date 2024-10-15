@@ -1,0 +1,1 @@
+import{d as t,r,o as s,c as o,W as n,a as c}from"./index-__dMlMNx.js";const _=t({__name:"FavoritesView",setup(d){const e=r([]),a=()=>JSON.parse(localStorage.getItem("likedWeather")||"[]");return s(()=>{e.value=a()}),(l,u)=>(c(),o(n,{weatherCards:e.value},null,8,["weatherCards"]))}});export{_ as default};
