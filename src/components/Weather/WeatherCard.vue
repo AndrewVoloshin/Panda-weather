@@ -21,11 +21,7 @@ const getIconUrl = (iconCode: string) => {
 
 <template>
   <div class="weather-card">
-
-    <Loader v-if="weatherStore.isLoading" />
-
-    <div v-else
-         class="weather-card__body">
+    <div class="weather-card__body">
       <div class="weather-card__temperature">
         <span>{{ Math.floor(weather.main.temp) }}°C</span>
         <img :src="getIconUrl(weather.weather[0].icon)"
