@@ -2,6 +2,9 @@
 import { reactive, ref, onMounted, watch } from 'vue';
 import Loader from '@/components/UI/Loader.vue';
 import { getWeatherByCityCoordinates } from '@/composable/getWeatherByCityCoordinates';
+import { useI18n } from 'vue-i18n';
+
+const { locale } = useI18n();
 
 const props = defineProps({
   weather: {
@@ -21,7 +24,7 @@ onMounted(() => {
 const getForecastFiveDays = async () => {
   isLoading.value = true;
 
-  const weatherForecast = await getWeatherByCityCoordinates(props.weather.coord, 'forecast');
+  const weatherForecast = await getWeatherByCityCoordinates(props.weather.coord, 'forecast', locale.value);
 
   const groupedByDays = weatherForecast.list.reduce((acc: any, current: any) => {
     const date = current.dt_txt.split(' ')[0];

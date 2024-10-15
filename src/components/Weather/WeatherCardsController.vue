@@ -29,7 +29,8 @@ const handleToggleForecast = () => {
 <template>
     <div class="weather-card__container">
         <div class="weather-card__header">
-            <h3>{{ weather.name }}</h3>
+            <h3>{{ $t(`weather.cities.${weather.name}`) }}</h3>
+
         </div>
 
         <weather-card v-if="isSingleDayForecast"

@@ -5,11 +5,11 @@ import { useWeatherStore } from '@/stores/weather';
 import { getCitiesByLocale } from '@/data/cities';
 
 const weatherStore = useWeatherStore();
-const { locale } = useI18n();
 
 const searchTerm = ref<string>('');
 const showDropdown = ref<boolean>(false);
 
+const { locale } = useI18n();
 const citiesList = computed(() => getCitiesByLocale(locale.value));
 
 const filteredCities = computed<string[]>(() => {
