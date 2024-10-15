@@ -30,7 +30,6 @@ const handleToggleForecast = () => {
     <div class="weather-card__container">
         <div class="weather-card__header">
             <h3>{{ weather.name }}</h3>
-            <p>{{ weather.date }}</p>
         </div>
 
         <weather-card v-if="isSingleDayForecast"

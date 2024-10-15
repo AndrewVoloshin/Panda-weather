@@ -10,10 +10,10 @@
             <nav>
                 <RouterLink to="/"
                             class="nav-link"
-                            exact-active-class="active-link">Home</RouterLink>
+                            exact-active-class="active-link">{{ $t('header.home') }}</RouterLink>
                 <RouterLink to="/favorite"
                             class="nav-link"
-                            exact-active-class="active-link">Favorite</RouterLink>
+                            exact-active-class="active-link">{{ $t('header.favorite') }}</RouterLink>
             </nav>
         </div>
     </header>

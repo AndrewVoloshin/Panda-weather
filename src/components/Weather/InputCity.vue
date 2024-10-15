@@ -1,16 +1,19 @@
 <script setup lang="ts">
 import { ref, computed, onMounted, onBeforeUnmount } from 'vue';
-import { cities } from '@/data/cities'
-import { useWeatherStore } from '@/stores/weather'
+import { useI18n } from 'vue-i18n';
+import { useWeatherStore } from '@/stores/weather';
+import { getCitiesByLocale } from '@/data/cities';
 
 const weatherStore = useWeatherStore();
+const { locale } = useI18n();
 
-const cityList: string[] = cities;
 const searchTerm = ref<string>('');
 const showDropdown = ref<boolean>(false);
 
+const citiesList = computed(() => getCitiesByLocale(locale.value));
+
 const filteredCities = computed<string[]>(() => {
-  return cityList.filter(city =>
+  return citiesList.value.filter(city =>
     city.toLowerCase().includes(searchTerm.value.toLowerCase())
   );
 });
@@ -22,7 +25,7 @@ const hideDropdown = (): void => {
 const selectCity = async (city: string) => {
   searchTerm.value = city;
   hideDropdown();
-  addCity()
+  addCity();
 };
 
 const addCity = () => {
@@ -49,11 +52,12 @@ onBeforeUnmount(() => {
 });
 </script>
 
+
 <template>
   <div class="dropdown">
     <input type="text"
            v-model="searchTerm"
-           placeholder="Enter city..."
+           :placeholder="$t('weather.placeholder')"
            @focus="showDropdown = true" />
     <ul v-if="showDropdown && filteredCities.length"
         class="suggestions">

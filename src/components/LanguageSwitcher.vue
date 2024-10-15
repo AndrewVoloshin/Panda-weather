@@ -90,6 +90,10 @@ const toggleDropdown = () => {
     cursor: pointer;
 }
 
+.language-option .flag-circle {
+    margin-right: 5px;
+}
+
 .language-option:hover {
     background-color: #f0f0f0;
 }
