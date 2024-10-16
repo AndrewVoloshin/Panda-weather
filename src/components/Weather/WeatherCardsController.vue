@@ -6,6 +6,7 @@ import ButtonLike from '@/components/UI/ButtonLike.vue';
 import ButtonDelete from '@/components/UI/ButtonDelete.vue';
 import ButtonSwitchForecast from '@/components/UI/ButtonSwitchForecast.vue';
 import Chart from '@/components/Chart.vue'
+import Loader from '@/components/UI/Loader.vue';
 
 const props = defineProps({
     weather: {
@@ -17,13 +18,15 @@ const props = defineProps({
         required: true,
     }
 });
-
+const isLoading = ref(true);
 const isSingleDayForecast = ref(true);
 
 const handleToggleForecast = () => {
     isSingleDayForecast.value = !isSingleDayForecast.value;
 };
 
+
+setTimeout(() => isLoading.value = false, 200)
 </script>
 
 <template>
@@ -33,23 +36,33 @@ const handleToggleForecast = () => {
 
         </div>
 
-        <weather-card v-if="isSingleDayForecast"
-                      :weather="props.weather" />
 
-        <weather-card-five-days v-else
-                                :weather="props.weather" />
+        <Loader v-if="isLoading" />
 
-        <chart :weather="props.weather" />
+        <div :style="{ visibility: isLoading ? 'hidden' : 'visible' }">
 
-        <div class="button-container">
 
-            <button-delete :weatherCards="weatherCards"
-                           :weather="props.weather" />
+            <weather-card v-if="isSingleDayForecast"
+                          :weather="props.weather" />
 
-            <button-switch-forecast @toggle="handleToggleForecast" />
+            <weather-card-five-days v-else
+                                    :weather="props.weather" />
 
-            <button-like :weather="props.weather" />
+            <chart :weather="props.weather" />
+
+            <div class="button-container">
+
+                <button-delete :weatherCards="weatherCards"
+                               :weather="props.weather" />
+
+                <button-switch-forecast @toggle="handleToggleForecast" />
+
+                <button-like :weather="props.weather" />
+            </div>
+
+
         </div>
+
     </div>
 </template>
 
@@ -99,6 +112,10 @@ const handleToggleForecast = () => {
 @media (min-width: 815px) {
     .weather-card__container {
         width: 420px;
+        height: 575px;
+        display: flex;
+        flex-direction: column;
+        justify-content: space-between;
     }
 }
 </style>

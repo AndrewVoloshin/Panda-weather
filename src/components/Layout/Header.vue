@@ -1,12 +1,9 @@
-<!-- src/components/Header.vue -->
 <template>
     <header class="header">
         <div class="header__container">
-            <a href="https://pandateam.net.ua/">
-                <img src="/panda_logo-100x100.png"
-                     alt="panda_logo"
-                     class="logo" />
-            </a>
+            <img src="/panda_logo-100x100.png"
+                 alt="panda_logo"
+                 class="logo" />
             <nav>
                 <RouterLink to="/"
                             class="nav-link"
@@ -39,6 +36,7 @@ import { RouterLink } from 'vue-router'
 }
 
 .logo {
+    width: 50px;
     height: 50px;
 }
 

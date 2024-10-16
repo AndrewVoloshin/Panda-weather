@@ -66,11 +66,7 @@ const props = defineProps({
     }
 }
 
-@media (min-width: 1190px) {
-    .weather-card {
-        width: 400px;
-    }
-}
+
 
 @media (min-width: 1200px) {
     .weather-list {

@@ -1,33 +1,19 @@
-# panda
+# Panda-weather
 
-This template should help get you started developing with Vue 3 in Vite.
+# [View Demo](https://andrewvoloshin.github.io/Panda-weather/) 
 
-## Recommended IDE Setup
 
-[VSCode](https://code.visualstudio.com/) + [Volar](https://marketplace.visualstudio.com/items?itemName=Vue.volar) (and disable Vetur).
+## How to Use
 
-## Type Support for `.vue` Imports in TS
-
-TypeScript cannot handle type information for `.vue` imports by default, so we replace the `tsc` CLI with `vue-tsc` for type checking. In editors, we need [Volar](https://marketplace.visualstudio.com/items?itemName=Vue.volar) to make the TypeScript language service aware of `.vue` types.
-
-## Customize configuration
-
-See [Vite Configuration Reference](https://vitejs.dev/config/).
-
-## Project Setup
-
-```sh
-npm install
+### Clone the repository:
+```bash
+   git clone https://github.com/AndrewVoloshin/Panda-weather.git
+   cd Panda-weather
 ```
+###  Install dependencies and run the project:
 
-### Compile and Hot-Reload for Development
-
-```sh
-npm run dev
+```bash
+   npm install
+   npm run serve
 ```
-
-### Type-Check, Compile and Minify for Production
-
-```sh
-npm run build
-```
+Open http://localhost:5173 in your browser to view the application.
