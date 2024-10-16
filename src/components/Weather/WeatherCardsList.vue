@@ -1,12 +1,10 @@
 <script setup lang="ts">
 import WeatherController from '@/components/Weather/WeatherCardsController.vue'
+import type { IWeather } from '@/types/weatherTypes'
 
-const props = defineProps({
-    weatherCards: {
-        type: Object,
-        required: true,
-    },
-});
+const props = defineProps<{
+    weatherCards: IWeather[]
+}>();
 
 </script>
 
