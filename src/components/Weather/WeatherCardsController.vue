@@ -7,10 +7,6 @@ import ButtonDelete from '@/components/UI/ButtonDelete.vue';
 import ButtonSwitchForecast from '@/components/UI/ButtonSwitchForecast.vue';
 import Chart from '@/components/Chart.vue'
 import Loader from '@/components/UI/Loader.vue';
-import { useWeatherStore } from '@/stores/weather'
-
-const weatherStore = useWeatherStore()
-
 
 const props = defineProps({
     weather: {
@@ -30,7 +26,7 @@ const handleToggleForecast = () => {
 };
 
 
-setTimeout(() => isLoading.value = false, 100)
+setTimeout(() => isLoading.value = false, 200)
 </script>
 
 <template>

@@ -1,7 +1,5 @@
 <script setup lang="ts">
 import { ref, onMounted } from 'vue'
-import Loader from '@/components/UI/Loader.vue';
-import { useWeatherStore } from '@/stores/weather'
 
 const props = defineProps({
   weather: {
@@ -10,7 +8,6 @@ const props = defineProps({
   }
 });
 
-const weatherStore = useWeatherStore()
 
 const getIconUrl = (iconCode: string) => {
   return `http://openweathermap.org/img/wn/${iconCode}@2x.png`;
