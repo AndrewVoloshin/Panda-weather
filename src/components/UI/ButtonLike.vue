@@ -1,17 +1,6 @@
-<template>
-    <div class="button-like"
-         @click="toggleLike">
-        <img v-if="isLiked"
-             src="/src/assets/svg/heart-solid.svg"
-             alt="">
-        <img v-else
-             src="/src/assets/svg/heart-regular.svg"
-             alt="">
-    </div>
-</template>
-
 <script setup lang="ts">
 import { ref, watch } from 'vue';
+import ConfirmOk from '@/components/Modal/ConfirmOk.vue';
 
 const props = defineProps({
     weather: {
@@ -21,13 +10,14 @@ const props = defineProps({
 });
 
 const isLiked = ref(false);
+const isModalVisible = ref(false);
 
 const toggleLike = () => {
     const weatherId = props.weather.id;
     const storedWeather = JSON.parse(localStorage.getItem('likedWeather') || '[]');
 
     if (!isLiked.value && storedWeather.length >= 5) {
-        alert('Вы не можете лайкнуть больше 5 элементов.');
+        isModalVisible.value = true;
         return;
     }
 
@@ -38,7 +28,12 @@ const toggleLike = () => {
         storedWeather.push(props.weather);
         localStorage.setItem('likedWeather', JSON.stringify(storedWeather));
     }
+
     isLiked.value = !isLiked.value;
+};
+
+const closeModal = () => {
+    isModalVisible.value = false;
 };
 
 watch(
@@ -49,9 +44,25 @@ watch(
     },
     { immediate: true }
 );
-
-
 </script>
+
+<template>
+    <div>
+        <div class="button-like"
+             @click="toggleLike">
+            <img v-if="isLiked"
+                 src="/src/assets/svg/heart-solid.svg"
+                 alt="Liked">
+            <img v-else
+                 src="/src/assets/svg/heart-regular.svg"
+                 alt="Not liked">
+        </div>
+
+        <confirm-ok v-if="isModalVisible"
+                    :isVisible="isModalVisible"
+                    @confirm="closeModal" />
+    </div>
+</template>
 
 <style scoped>
 .button-container {
@@ -72,22 +83,4 @@ watch(
     width: 100%;
     height: 100%;
 }
-
-/* button {
-    margin-right: 8px;
-    padding: 8px 16px;
-    border: none;
-    background-color: #007bff;
-    color: white;
-    cursor: pointer;
-}
-
-button:hover {
-    background-color: #0056b3;
-}
-
-button span {
-    margin-right: 4px;
-    font-size: 16px;
-} */
 </style>

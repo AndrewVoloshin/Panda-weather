@@ -78,14 +78,10 @@ h3 {
 }
 
 .confirm-button:hover {
-  /* background-color: #4CAF50; */
-  /* color: #fff; */
   border-color: #4CAF50;
 }
 
 .cancel-button:hover {
-  /* background-color: #f44336; */
-  /* color: #fff; */
   border-color: #f44336;
 }
 
