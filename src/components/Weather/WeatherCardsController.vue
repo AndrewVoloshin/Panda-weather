@@ -7,17 +7,13 @@ import ButtonDelete from '@/components/UI/ButtonDelete.vue';
 import ButtonSwitchForecast from '@/components/UI/ButtonSwitchForecast.vue';
 import Chart from '@/components/Chart.vue'
 import Loader from '@/components/UI/Loader.vue';
+import type { IWeather } from '@/types/weatherTypes'
 
-const props = defineProps({
-    weather: {
-        type: Object,
-        required: true,
-    },
-    weatherCards: {
-        type: Object,
-        required: true,
-    }
-});
+const props = defineProps<{
+    weather: IWeather,
+    weatherCards: IWeather[]
+}>();
+
 const isLoading = ref(true);
 const isSingleDayForecast = ref(true);
 
@@ -33,14 +29,11 @@ setTimeout(() => isLoading.value = false, 200)
     <div class="weather-card__container">
         <div class="weather-card__header">
             <h3>{{ weather.name }}</h3>
-            <p>{{ weather.date }}</p>
         </div>
-
 
         <Loader v-if="isLoading" />
 
         <div :style="{ visibility: isLoading ? 'hidden' : 'visible' }">
-
 
             <weather-card v-if="isSingleDayForecast"
                           :weather="props.weather" />

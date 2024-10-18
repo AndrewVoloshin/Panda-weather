@@ -42,7 +42,7 @@ export interface IWeather {
     };
 }
 
-interface IForecast {
+export interface IForecast {
     dt: number;
     main: {
         temp: number;
@@ -61,4 +61,4 @@ interface IForecast {
     dt_txt: string;
 }
 
-export type TWeather = IWeather | IForecast | null
+export type TWeather = IWeather | IForecast

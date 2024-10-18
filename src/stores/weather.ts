@@ -2,12 +2,12 @@ import { ref, watch, reactive } from 'vue'
 import { defineStore } from 'pinia'
 import { getCityCoordinates } from '@/composable/getCityCoordinates'
 import { getWeatherByCityCoordinates } from '@/composable/getWeatherByCityCoordinates'
-import type { TWeather } from '@/types/weatherTypes'
+import type { IWeather } from '@/types/weatherTypes'
 
 export const useWeatherStore = defineStore('weather', () => {
   const isGetMyLocation = ref(false)
   const citySelected = ref('')
-  const weatherCards = reactive<TWeather[]>([])
+  const weatherCards = reactive<IWeather[]>([])
   const isLoading = ref(false)
 
   const startLoading = () => {
@@ -21,7 +21,7 @@ export const useWeatherStore = defineStore('weather', () => {
   const addWeatherToCardByInput = async (newCity: string) => {
     try {
       const coordinates = await getCityCoordinates(newCity)
-      const weather = await getWeatherByCityCoordinates(coordinates)
+      const weather = await getWeatherByCityCoordinates(coordinates) as IWeather
       weatherCards.unshift(weather)
     }
     catch (error) {

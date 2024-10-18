@@ -8,14 +8,12 @@ export async function getCityCoordinates(city: string): Promise<ICoordinates> {
         const data = await response.json();
 
         if (data && data.length > 0) {
-            const lat = data[0].lat
-            const lon = data[0].lon
-            return { lat, lon };
+            const { lat, lon } = data[0]
+            return { lat, lon }
         } else {
             throw new Error(`Could not find coordinates for the city: ${city}`);
         }
     } catch (error) {
-        console.error('Error when receiving coordinates:', error);
-        throw new Error(`Error when getting coordinates for a city: ${city}`);
+        throw error;
     }
 }

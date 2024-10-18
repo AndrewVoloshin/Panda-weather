@@ -1,18 +1,13 @@
 <script setup lang="ts">
-import { ref, onMounted } from 'vue'
+import type { IWeather } from '@/types/weatherTypes'
 
-const props = defineProps({
-  weather: {
-    type: Object,
-    required: true
-  }
-});
-
+const props = defineProps<{
+  weather: IWeather
+}>()
 
 const getIconUrl = (iconCode: string) => {
   return `http://openweathermap.org/img/wn/${iconCode}@2x.png`;
 };
-
 
 </script>
 

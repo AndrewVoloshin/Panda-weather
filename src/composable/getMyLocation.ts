@@ -1,7 +1,7 @@
 import { getWeatherByCityCoordinates } from '@/composable/getWeatherByCityCoordinates'
+import type { ICoordinates, IWeather } from '@/types/weatherTypes'
 
-
-export const getMyLocation = async (): Promise<{ lat: string; lon: string } | null> => {
+export const getMyLocation = async (): Promise<{ lat: string; lon: string }> => {
     return new Promise((resolve, reject) => {
         if (navigator.geolocation) {
             navigator.geolocation.getCurrentPosition(
@@ -10,20 +10,26 @@ export const getMyLocation = async (): Promise<{ lat: string; lon: string } | nu
                     resolve({ lat: latitude.toString(), lon: longitude.toString() });
                 },
                 (error) => {
-                    console.error('Error getting location:', error);
-                    reject(null);
+                    reject(new Error('Error getting location: ' + error.message));
                 }
             );
         } else {
-            console.error('Geolocation is not supported by this browser.');
-            reject(null);
+            reject(new Error('Geolocation is not supported by this browser.'));
         }
     });
 };
 
 export const getWeatherMyPosition = async () => {
-    const myCoordinates = await getMyLocation();
-    const weatherData = await getWeatherByCityCoordinates(myCoordinates);
-    return weatherData
+    try {
+        const myCoordinates: ICoordinates = await getMyLocation();
+        const weatherData = await getWeatherByCityCoordinates(myCoordinates) as IWeather;
+        return weatherData
+    }
+    catch (error) {
+        throw error;
+    }
+
+
+
 }
 
